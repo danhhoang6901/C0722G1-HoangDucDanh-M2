@@ -3,7 +3,7 @@ package ss11_stack_queue.exercise.invert_element;
 import java.util.Scanner;
 import java.util.Stack;
 
-public class Reversestring {
+public class ReverseString {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Stack<String> stack = new Stack<>();

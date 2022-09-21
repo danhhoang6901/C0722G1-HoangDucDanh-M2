@@ -10,7 +10,7 @@ public class Truck extends Transport{
         this.tonnage = tonnage;
     }
 
-    public Truck(String seaOf​Control, String manufacturer, int yearOfManufacture, String owner, double tonnage) {
+    public Truck(String seaOf​Control, Manufacturer manufacturer, int yearOfManufacture, String owner, double tonnage) {
         super(seaOf​Control, manufacturer, yearOfManufacture, owner);
         this.tonnage = tonnage;
     }

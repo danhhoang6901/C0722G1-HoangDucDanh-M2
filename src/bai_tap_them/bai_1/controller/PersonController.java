@@ -25,7 +25,7 @@ public class PersonController {
                     System.out.println("Đã thoát khỏi chương trình");
                     System.exit(0);
                 default:
-                    System.out.println("Lựa chọn của bạn không đúng!");
+                    System.err.println("Lựa chọn của bạn không đúng!");
             }
         }
     }

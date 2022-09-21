@@ -10,7 +10,7 @@ public class Motorcycle extends Transport {
         this.wattage = wattage;
     }
 
-    public Motorcycle(String seaOf​Control, String manufacturer, int yearOfManufacture, String owner, double wattage) {
+    public Motorcycle(String seaOf​Control, Manufacturer manufacturer, int yearOfManufacture, String owner, double wattage) {
         super(seaOf​Control, manufacturer, yearOfManufacture, owner);
         this.wattage = wattage;
     }

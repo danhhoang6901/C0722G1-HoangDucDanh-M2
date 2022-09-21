@@ -3,6 +3,11 @@ package bai_tap_them.bai_1.model;
 public class Teacher extends Person {
     private String specialize;
 
+    @Override
+    public String getInfo() {
+        return String.format("%s,%s", super.toString(), specialize);
+    }
+
     public Teacher() {
     }
 
@@ -25,8 +30,6 @@ public class Teacher extends Person {
 
     @Override
     public String toString() {
-        return "Teacher{" +
-                "specialize = '" + specialize + '\'' +
-                super.toString();
+        return String.format("%s,%s", super.toString(), specialize);
     }
 }

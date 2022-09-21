@@ -36,7 +36,7 @@ public class StudentController {
                 case 5:
                     return;
                 default:
-                    System.out.println("Lựa chọn của bạn không đúng!");
+                    System.err.println("Lựa chọn của bạn không đúng!");
             }
         }
     }

@@ -12,7 +12,7 @@ public class Car extends Transport{
         this.vehicleType = vehicleType;
     }
 
-    public Car(String seaOf​Control, String manufacturer, int yearOfManufacture, String owner, int numberOfSeats, String vehicleType) {
+    public Car(String seaOf​Control, Manufacturer manufacturer, int yearOfManufacture, String owner, int numberOfSeats, String vehicleType) {
         super(seaOf​Control, manufacturer, yearOfManufacture, owner);
         this.numberOfSeats = numberOfSeats;
         this.vehicleType = vehicleType;

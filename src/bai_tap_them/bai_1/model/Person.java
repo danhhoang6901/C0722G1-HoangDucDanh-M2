@@ -6,6 +6,8 @@ public abstract class Person {
     private String dateOfBirth;
     private String gender;
 
+    public abstract String getInfo();
+
     public Person() {
     }
 
@@ -50,11 +52,6 @@ public abstract class Person {
 
     @Override
     public String toString() {
-        return
-                ", id = " + id +
-                ", name = '" + name + '\'' +
-                ", dateOfBirth = '" + dateOfBirth + '\'' +
-                ", gender = '" + gender + '\'' +
-                '}';
+        return String.format("%s,%s,%s,%s", id, name, dateOfBirth, gender);
     }
 }

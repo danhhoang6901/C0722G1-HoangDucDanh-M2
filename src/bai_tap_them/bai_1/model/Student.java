@@ -4,6 +4,11 @@ public class Student extends Person {
     private String nameClass;
     private double score;
 
+    @Override
+    public String getInfo() {
+        return String.format("%s,%s,%s", super.toString(), nameClass, score);
+    }
+
     public Student() {
     }
 
@@ -36,9 +41,6 @@ public class Student extends Person {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "nameClass = '" + nameClass + '\'' +
-                ", score = " + score +
-                  super.toString();
+        return String.format("%s,%s,%s",super.toString(),nameClass,score);
     }
 }

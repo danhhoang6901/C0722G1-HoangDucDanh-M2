@@ -2,14 +2,14 @@ package bai_tap_them.bai_2.model;
 
 public abstract class Transport {
     private String seaOf​Control;
-    private String manufacturer;
+    private Manufacturer manufacturer;
     private int yearOfManufacture;
     private String owner;
 
     public Transport() {
     }
 
-    public Transport(String seaOf​Control, String manufacturer, int yearOfManufacture, String owner) {
+    public Transport(String seaOf​Control, Manufacturer manufacturer, int yearOfManufacture, String owner) {
         this.seaOf​Control = seaOf​Control;
         this.manufacturer = manufacturer;
         this.yearOfManufacture = yearOfManufacture;
@@ -24,11 +24,11 @@ public abstract class Transport {
         this.seaOf​Control = seaOf​Control;
     }
 
-    public String getManufacturer() {
+    public Manufacturer getManufacturer() {
         return manufacturer;
     }
 
-    public void setManufacturer(String manufacturer) {
+    public void setManufacturer(Manufacturer manufacturer) {
         this.manufacturer = manufacturer;
     }
 

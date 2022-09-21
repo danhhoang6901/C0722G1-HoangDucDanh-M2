@@ -23,6 +23,19 @@ public class CarController {
                 case 1:
                     carService.addCar();
                     break;
+                case 2:
+                    carService.displayALlCar();
+                    break;
+                case 3:
+                    carService.removeCar();
+                    break;
+                case 4:
+                    carService.searchCar();
+                    break;
+                case 5:
+                    return;
+                default:
+                    System.err.println("Lựa chọn của bạn không đúng!");
             }
         }
     }

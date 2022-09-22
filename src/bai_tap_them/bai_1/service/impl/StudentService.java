@@ -41,10 +41,10 @@ public class StudentService implements IStudentService {
 
         String name;
         do {
-            System.out.print("Nhập tên học viên: ");
+            System.out.print("Nhập họ tên học viên: ");
             try {
                 name = scanner.nextLine();
-                if (!name.matches("^\\D{4,50}\\s*$")) {
+                if (!name.matches("^\\D{5,50}\\s*$")) {
                     throw new ExceptionCheck("Tên không hợp lệ!");
                 }
                 break;
@@ -132,6 +132,7 @@ public class StudentService implements IStudentService {
 
     @Override
     public void addStudent() {
+        students = ReadFileStudent.readFileStudent(SRC_STUDENT);
         Student student = this.infoStudent();
         students.add(student);
         boolean swap = true;
@@ -202,6 +203,24 @@ public class StudentService implements IStudentService {
                 students.set(i, student);
                 WriteFileStudent.writeFileStudent(SRC_STUDENT, students);
                 System.out.println("Chỉnh sửa thông tin học viên thành công");
+                flag = true;
+                break;
+            }
+        }
+        if (!flag) {
+            System.err.println("Không tìm thấy học viên!");
+        }
+    }
+
+    @Override
+    public void searchStudentById() {
+        students = ReadFileStudent.readFileStudent(SRC_STUDENT);
+        System.out.print("Nhập id học viên bạn muốn tìm kiếm: ");
+        int id = Integer.parseInt(scanner.nextLine());
+        boolean flag = false;
+        for (Student student : students) {
+            if (student.getId() == id) {
+                System.out.println(student);
                 flag = true;
                 break;
             }

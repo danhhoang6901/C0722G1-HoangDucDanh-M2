@@ -40,10 +40,6 @@ public class Manufacturer {
 
     @Override
     public String toString() {
-        return "Manufacturer{" +
-                "manufacturerCode='" + manufacturerCode + '\'' +
-                ", manufacturerName='" + manufacturerName + '\'' +
-                ", nation='" + nation + '\'' +
-                '}';
+        return String.format("%s,%s,%s", manufacturerCode, manufacturerName, nation);
     }
 }

@@ -1,8 +1,13 @@
 package bai_tap_them.bai_2.model;
 
-public class Car extends Transport{
+public class Car extends Transport {
     private int numberOfSeats;
     private String vehicleType;
+
+    @Override
+    public String getInfo() {
+        return String.format("%s,%s,%s", super.toString(), numberOfSeats, vehicleType);
+    }
 
     public Car() {
     }
@@ -12,7 +17,7 @@ public class Car extends Transport{
         this.vehicleType = vehicleType;
     }
 
-    public Car(String seaOf​Control, Manufacturer manufacturer, int yearOfManufacture, String owner, int numberOfSeats, String vehicleType) {
+    public Car(String seaOf​Control, Manufacturer manufacturer, String yearOfManufacture, String owner, int numberOfSeats, String vehicleType) {
         super(seaOf​Control, manufacturer, yearOfManufacture, owner);
         this.numberOfSeats = numberOfSeats;
         this.vehicleType = vehicleType;

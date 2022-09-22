@@ -1,7 +1,7 @@
-package bai_tap_them.ss12_java_collection_framework.exercise.controller;
+package ss12_java_collection_framework.exercise.controller;
 
-import bai_tap_them.ss12_java_collection_framework.exercise.service.IProductService;
-import bai_tap_them.ss12_java_collection_framework.exercise.service.impl.ProductService;
+import ss12_java_collection_framework.exercise.service.IProductService;
+import ss12_java_collection_framework.exercise.service.impl.ProductService;
 
 import java.util.Scanner;
 

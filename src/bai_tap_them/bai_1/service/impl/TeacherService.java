@@ -1,5 +1,6 @@
 package bai_tap_them.bai_1.service.impl;
 
+import bai_tap_them.bai_1.model.Student;
 import bai_tap_them.bai_1.model.Teacher;
 import bai_tap_them.bai_1.service.ITeacherService;
 import bai_tap_them.bai_1.service.exception.ExceptionCheck;
@@ -216,5 +217,23 @@ public class TeacherService implements ITeacherService {
             System.err.println("Không tìm thấy giảng viên!");
         }
     }
+
+    @Override
+    public void searchTeacherById() {
+        System.out.print("Nhập id giảng viên bạn muốn tìm kiếm: ");
+        int id = Integer.parseInt(scanner.nextLine());
+        boolean flag = false;
+        for (Teacher teacher : teachers) {
+            if (teacher.getId() == id) {
+                System.out.println(teacher);
+                flag = true;
+                break;
+            }
+        }
+        if (!flag) {
+            System.err.println("Không tìm thấy giảng viên!");
+        }
+    }
 }
+
 

@@ -1,8 +1,7 @@
-package bai_tap_them.ss12_java_collection_framework.exercise.service.impl;
+package ss12_java_collection_framework.exercise.service.impl;
 
-import bai_tap_them.bai_1.model.Student;
-import bai_tap_them.ss12_java_collection_framework.exercise.model.Product;
-import bai_tap_them.ss12_java_collection_framework.exercise.service.IProductService;
+import ss12_java_collection_framework.exercise.model.Product;
+import ss12_java_collection_framework.exercise.service.IProductService;
 
 import java.util.ArrayList;
 import java.util.List;

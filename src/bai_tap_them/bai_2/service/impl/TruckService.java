@@ -55,7 +55,7 @@ public class TruckService implements ITruckService {
                 System.err.println("Lựa chọn của bạn không đúng!");
         }
         System.out.print("Nhập năm sản xuất: ");
-        int yearOfManufacture = Integer.parseInt(scanner.nextLine());
+        String yearOfManufacture = scanner.nextLine();
         System.out.print("Nhập chủ sở hữu: ");
         String owner = scanner.nextLine();
         System.out.print("Nhập tải trọng: ");

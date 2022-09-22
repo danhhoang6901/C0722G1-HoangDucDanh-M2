@@ -17,7 +17,8 @@ public class TeacherController {
             System.out.println("2. Xóa giảng viên");
             System.out.println("3. Xem danh sách giảng viên");
             System.out.println("4. Chỉnh sửa thông tin giảng viên");
-            System.out.println("5. Quay lại");
+            System.out.println("5. Tìm kiếm giảng viên theo id");
+            System.out.println("6. Quay lại");
             System.out.print("Chọn: ");
             int choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
@@ -34,6 +35,9 @@ public class TeacherController {
                     teacherService.editTeacher();
                     break;
                 case 5:
+                    teacherService.searchTeacherById();
+                    break;
+                case 6:
                     return;
                 default:
                     System.err.println("Lựa chọn của bạn không đúng!");

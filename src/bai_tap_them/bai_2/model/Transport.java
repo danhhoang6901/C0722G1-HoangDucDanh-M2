@@ -3,13 +3,15 @@ package bai_tap_them.bai_2.model;
 public abstract class Transport {
     private String seaOf​Control;
     private Manufacturer manufacturer;
-    private int yearOfManufacture;
+    private String yearOfManufacture;
     private String owner;
+
+    public abstract String getInfo();
 
     public Transport() {
     }
 
-    public Transport(String seaOf​Control, Manufacturer manufacturer, int yearOfManufacture, String owner) {
+    public Transport(String seaOf​Control, Manufacturer manufacturer, String yearOfManufacture, String owner) {
         this.seaOf​Control = seaOf​Control;
         this.manufacturer = manufacturer;
         this.yearOfManufacture = yearOfManufacture;
@@ -32,11 +34,11 @@ public abstract class Transport {
         this.manufacturer = manufacturer;
     }
 
-    public int getYearOfManufacture() {
+    public String getYearOfManufacture() {
         return yearOfManufacture;
     }
 
-    public void setYearOfManufacture(int yearOfManufacture) {
+    public void setYearOfManufacture(String yearOfManufacture) {
         this.yearOfManufacture = yearOfManufacture;
     }
 
@@ -50,11 +52,6 @@ public abstract class Transport {
 
     @Override
     public String toString() {
-        return "Transport{" +
-                "seaOf​Control='" + seaOf​Control + '\'' +
-                ", manufacturer='" + manufacturer + '\'' +
-                ", yearOfManufacture=" + yearOfManufacture +
-                ", owner='" + owner + '\'' +
-                '}';
+        return String.format("%s,%s,%s,%S",seaOf​Control,manufacturer,yearOfManufacture,owner);
     }
 }

@@ -1,4 +1,4 @@
-package bai_tap_them.ss12_java_collection_framework.exercise.service;
+package ss12_java_collection_framework.exercise.service;
 
 public interface IProductService {
     void addProduct();

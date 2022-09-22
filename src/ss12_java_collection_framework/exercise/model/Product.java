@@ -1,4 +1,4 @@
-package bai_tap_them.ss12_java_collection_framework.exercise.model;
+package ss12_java_collection_framework.exercise.model;
 
 public class Product {
     private int id;

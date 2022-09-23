@@ -4,6 +4,8 @@ import bai_tap_them.bai_1.model.Student;
 import bai_tap_them.bai_1.model.Teacher;
 import bai_tap_them.bai_1.service.ITeacherService;
 import bai_tap_them.bai_1.service.exception.ExceptionCheck;
+import bai_tap_them.bai_1.util.student.ReadFileStudent;
+import bai_tap_them.bai_1.util.student.WriteFileStudent;
 import bai_tap_them.bai_1.util.teacher.ReadFileTeacher;
 import bai_tap_them.bai_1.util.teacher.WriteFileTeacher;
 
@@ -219,21 +221,60 @@ public class TeacherService implements ITeacherService {
     }
 
     @Override
-    public void searchTeacherById() {
+    public void searchTeacher() {
+        teachers = ReadFileTeacher.readFileTeacher(SRC_TEACHER);
         System.out.print("Nhập id giảng viên bạn muốn tìm kiếm: ");
         int id = Integer.parseInt(scanner.nextLine());
         boolean flag = false;
-        for (Teacher teacher : teachers) {
-            if (teacher.getId() == id) {
-                System.out.println(teacher);
+        for (int i = 0; i < teachers.size(); i++) {
+            if (teachers.get(i).getId() == id) {
+                System.out.println(teachers.get(i).toString());
                 flag = true;
                 break;
             }
+            System.err.println("Không tìm thấy giảng viên!");
+            System.out.print("Nhập tên giảng viên muốn tìm kiếm: ");
+            String name = scanner.nextLine();
+            for (int j = 0; j < teachers.size(); j++) {
+                if (teachers.get(j).getName().contains(name)) {
+                    System.out.println(teachers.get(j).toString());
+                }
+            }
+            break;
         }
         if (!flag) {
             System.err.println("Không tìm thấy giảng viên!");
         }
     }
+
+    @Override
+    public void sortTeacher() {
+        teachers = ReadFileTeacher.readFileTeacher(SRC_TEACHER);
+        boolean isSwap = true;
+        for (int k = 0; k < teachers.size() - 1 && isSwap; k++) {
+            isSwap = false;
+            for (int i = 0; i < teachers.size() - 1 - k; i++) {
+                if (teachers.get(i).getName().compareTo(teachers.get(i + 1).getName()) > 0) {
+                    isSwap = true;
+                    Teacher temp = teachers.get(i + 1);
+                    teachers.set(i + 1, teachers.get(i));
+                    teachers.set(i, temp);
+                    WriteFileTeacher.writeFileTeacher(SRC_TEACHER, teachers);
+                }
+                if (teachers.get(i).getName().equals(teachers.get(i + 1).getName())) {
+                    if (teachers.get(i).getId() > teachers.get(i + 1).getId()) {
+                        isSwap = true;
+                        Teacher temp = teachers.get(i + 1);
+                        teachers.set(i + 1, teachers.get(i));
+                        teachers.set(i, temp);
+                        WriteFileTeacher.writeFileTeacher(SRC_TEACHER, teachers);
+                    }
+                }
+            }
+        }
+        System.out.println("Sắp xếp giảng viên thành công");
+    }
 }
+
 
 

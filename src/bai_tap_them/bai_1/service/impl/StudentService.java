@@ -135,19 +135,6 @@ public class StudentService implements IStudentService {
         students = ReadFileStudent.readFileStudent(SRC_STUDENT);
         Student student = this.infoStudent();
         students.add(student);
-        boolean swap = true;
-        for (int k = 0; k < students.size() - 1 && swap; k++) {
-            swap = false;
-            for (int i = 0; i < students.size() - 1 - k; i++) {
-
-                if (students.get(i).getName().compareTo(students.get(i + 1).getName()) > 0) {
-                    swap = true;
-                    Student temp = students.get(i + 1);
-                    students.set(i + 1, students.get(i));
-                    students.set(i, temp);
-                }
-            }
-        }
         WriteFileStudent.writeFileStudent(SRC_STUDENT, students);
         System.out.println("Thêm mới học viên thành công");
     }
@@ -213,21 +200,61 @@ public class StudentService implements IStudentService {
     }
 
     @Override
-    public void searchStudentById() {
+    public void searchStudent() {
         students = ReadFileStudent.readFileStudent(SRC_STUDENT);
         System.out.print("Nhập id học viên bạn muốn tìm kiếm: ");
         int id = Integer.parseInt(scanner.nextLine());
         boolean flag = false;
-        for (Student student : students) {
-            if (student.getId() == id) {
-                System.out.println(student);
+        for (Student student1 : students) {
+            if (student1.getId() == id) {
+                System.out.println(student1);
                 flag = true;
                 break;
             }
+            System.err.println("Không tìm thấy học viên!");
+            System.out.print("Nhập tên học viên muốn tìm kiếm: ");
+            String name = scanner.nextLine();
+            for (Student student : students) {
+                if (student.getName().contains(name)) {
+                    System.out.println(student);
+                    flag = true;
+                    break;
+                }
+            }
+            break;
         }
         if (!flag) {
             System.err.println("Không tìm thấy học viên!");
         }
     }
+
+    @Override
+    public void sortStudent() {
+        students = ReadFileStudent.readFileStudent(SRC_STUDENT);
+        boolean isSwap = true;
+        for (int k = 0; k < students.size() - 1 && isSwap; k++) {
+            isSwap = false;
+            for (int i = 0; i < students.size() - 1 - k; i++) {
+                if (students.get(i).getName().compareTo(students.get(i + 1).getName()) > 0) {
+                    isSwap = true;
+                    Student temp = students.get(i + 1);
+                    students.set(i + 1, students.get(i));
+                    students.set(i, temp);
+                    WriteFileStudent.writeFileStudent(SRC_STUDENT, students);
+                }
+                if (students.get(i).getName().equals(students.get(i + 1).getName())) {
+                    if (students.get(i).getId() > students.get(i + 1).getId()) {
+                        isSwap = true;
+                        Student temp = students.get(i + 1);
+                        students.set(i + 1, students.get(i));
+                        students.set(i, temp);
+                        WriteFileStudent.writeFileStudent(SRC_STUDENT, students);
+                    }
+                }
+            }
+        }
+        System.out.println("Sắp xếp học viên thành công");
+    }
 }
+
 

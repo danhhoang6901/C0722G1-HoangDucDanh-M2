@@ -9,5 +9,7 @@ public interface IStudentService {
 
     void editStudent();
 
-    void searchStudentById();
+    void searchStudent();
+
+    void sortStudent();
 }

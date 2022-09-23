@@ -9,5 +9,7 @@ public interface ITeacherService {
 
     void editTeacher();
 
-    void searchTeacherById();
+    void searchTeacher();
+
+    void sortTeacher();
 }

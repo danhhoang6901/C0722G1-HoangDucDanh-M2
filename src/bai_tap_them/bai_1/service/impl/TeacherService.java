@@ -94,7 +94,7 @@ public class TeacherService implements ITeacherService {
                     check = true;
                     break;
                 default:
-                    System.err.println("Lựa chọn của bạn không đúng");
+                    System.err.println("Lựa chọn của bạn không đúng!");
             }
             if (check) {
                 break;

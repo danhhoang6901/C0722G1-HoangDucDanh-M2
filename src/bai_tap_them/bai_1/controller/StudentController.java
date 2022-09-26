@@ -17,7 +17,7 @@ public class StudentController {
             System.out.println("2. Xóa học viên");
             System.out.println("3. Xem danh sách học viên");
             System.out.println("4. Chỉnh sửa thông tin học viên");
-            System.out.println("5. Tìm kiếm học viên theo id");
+            System.out.println("5. Tìm kiếm học viên ");
             System.out.println("6. Sắp xếp học viên");
             System.out.println("7. Quay lại");
             System.out.print("Chọn: ");

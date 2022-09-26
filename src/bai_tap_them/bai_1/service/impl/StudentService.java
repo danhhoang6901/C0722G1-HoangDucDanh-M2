@@ -15,10 +15,6 @@ public class StudentService implements IStudentService {
     private static List<Student> students = new ArrayList<>();
     private static final String SRC_STUDENT = "src\\bai_tap_them\\bai_1\\data\\student.csv";
 
-//    static {
-//        students.add(new Student(1, "Danh", "06/09/2001", "Nam", "C07", 10));ư\
-//    }
-
     public Student infoStudent() {
         int id;
         do {
@@ -61,6 +57,9 @@ public class StudentService implements IStudentService {
                 if (dateOfbirth.matches("^(?:(?:31(\\\\/|-|\\\\.)(?:0?[13578]|1[02]))\\\\1|(?:(?:29|30)(\\\\/|-|\\\\.)(?:0?[13-9]|1[0-2])\\\\2))(?:(?:1[6-9]|[2-9]\\\\d)?\\\\d{2})$|^(?:29(\\\\/|-|\\\\.)0?2\\\\3(?:(?:(?:1[6-9]|[2-9]\\\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\\\d|2[0-8])(\\\\/|-|\\\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\\\4(?:(?:1[6-9]|[2-9]\\\\d)?\\\\d{2})$")) {
                     throw new ExceptionCheck("Ngày sinh phải đúng định dạng dd/MM/yyyy!");
                 }
+                if (!checkDayMonthYear(dateOfbirth)) {
+                    throw new ExceptionCheck("Ngày sinh không hợp lệ!");
+                }
                 break;
             } catch (ExceptionCheck e) {
                 System.err.println(e.getMessage());
@@ -91,7 +90,7 @@ public class StudentService implements IStudentService {
                     check = true;
                     break;
                 default:
-                    System.err.println("Lựa chọn của bạn không đúng");
+                    System.err.println("Lựa chọn của bạn không đúng!");
             }
             if (check) {
                 break;
@@ -254,6 +253,18 @@ public class StudentService implements IStudentService {
             }
         }
         System.out.println("Sắp xếp học viên thành công");
+    }
+
+    public static boolean checkDayMonthYear(String string) {
+        int[] day = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        int[] arr = new int[3];
+        arr[0] = Integer.parseInt(string.substring(0, 1).concat(string.substring(1, 2)));
+        arr[1] = Integer.parseInt(string.substring(3, 4).concat(string.substring(4, 5)));
+        arr[2] = Integer.parseInt(string.substring(6));
+        if (arr[2] % 4 == 0 && !(arr[2] % 100 == 0 && arr[2] % 400 != 0)) {
+            arr[0] = day[arr[1] - 1] + 1;
+        }
+        return (arr[0] <= day[arr[1] - 1]);
     }
 }
 

@@ -14,7 +14,7 @@ public class ReadFileCar {
 //        String[] info;
 //        for (String line : strings) {
 //            info = line.split(",");
-//            cars.add(new Car(info[0], , info[2], info[3], Integer.parseInt(info[4]), info[5]));
+//            cars.add(new Car(info[0], info[1], info[2], info[3], Integer.parseInt(info[4]), info[5]));
 //        }
 //        return cars;
 //    }

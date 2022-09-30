@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ReadFileCar {
 //    public static List<Car> readFileCar(String src) {
-//        List<String> strings = ReadFile.readFile(src);
+//        List<String> strings = ReadFileProduct.readFile(src);
 //        List<Car> cars = new ArrayList<>();
 //        String[] info;
 //        for (String line : strings) {

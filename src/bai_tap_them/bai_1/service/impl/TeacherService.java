@@ -1,11 +1,8 @@
 package bai_tap_them.bai_1.service.impl;
 
-import bai_tap_them.bai_1.model.Student;
 import bai_tap_them.bai_1.model.Teacher;
 import bai_tap_them.bai_1.service.ITeacherService;
 import bai_tap_them.bai_1.service.exception.ExceptionCheck;
-import bai_tap_them.bai_1.util.student.ReadFileStudent;
-import bai_tap_them.bai_1.util.student.WriteFileStudent;
 import bai_tap_them.bai_1.util.teacher.ReadFileTeacher;
 import bai_tap_them.bai_1.util.teacher.WriteFileTeacher;
 
@@ -14,13 +11,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TeacherService implements ITeacherService {
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
     private static List<Teacher> teachers = new ArrayList<>();
     private static final String SRC_TEACHER = "src\\bai_tap_them\\bai_1\\data\\teacher.csv";
-//
-//    static {
-//        teachers.add(new Teacher(1, "HảiTT", "06/09/2001", "Nam", "Tutor"));
-//    }
 
     public Teacher infoTeacher() {
         int id;
@@ -44,7 +37,7 @@ public class TeacherService implements ITeacherService {
 
         String name;
         do {
-            System.out.print("Nhập tên giảng viên: ");
+            System.out.print("Nhập họ tên giảng viên: ");
             try {
                 name = scanner.nextLine();
                 if (!name.matches("^\\D{4,50}\\s*$")) {
@@ -61,8 +54,11 @@ public class TeacherService implements ITeacherService {
             System.out.print("Nhập ngày sinh theo định dạng dd/MM/yyyy: ");
             try {
                 dateOfbirth = scanner.nextLine();
-                if (dateOfbirth.matches("^(?:(?:31(\\\\/|-|\\\\.)(?:0?[13578]|1[02]))\\\\1|(?:(?:29|30)(\\\\/|-|\\\\.)(?:0?[13-9]|1[0-2])\\\\2))(?:(?:1[6-9]|[2-9]\\\\d)?\\\\d{2})$|^(?:29(\\\\/|-|\\\\.)0?2\\\\3(?:(?:(?:1[6-9]|[2-9]\\\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\\\d|2[0-8])(\\\\/|-|\\\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\\\4(?:(?:1[6-9]|[2-9]\\\\d)?\\\\d{2})$")) {
+                if (!dateOfbirth.matches("^\\d{2}/\\d{2}/\\d{4}$")) {
                     throw new ExceptionCheck("Ngày sinh phải đúng định dạng dd/MM/yyyy!");
+                }
+                if (!checkDayMonthYear(dateOfbirth)) {
+                    throw new ExceptionCheck("Ngày sinh không hợp lệ!");
                 }
                 break;
             } catch (ExceptionCheck e) {
@@ -89,7 +85,7 @@ public class TeacherService implements ITeacherService {
                     check = true;
                     break;
                 case 3:
-                    System.out.print("Nhập giới tính khác: ");
+                    System.out.print("Nhập giới tính: ");
                     gender = scanner.nextLine();
                     check = true;
                     break;
@@ -100,6 +96,7 @@ public class TeacherService implements ITeacherService {
                 break;
             }
         } while (true);
+
         String specialize = "";
         do {
             System.out.println("Chuyên môn giảng viên: ");
@@ -124,7 +121,7 @@ public class TeacherService implements ITeacherService {
                     check = true;
                     break;
                 case 4:
-                    System.out.print("Nhập chuyên môn khác của giảng viên: ");
+                    System.out.print("Nhập chuyên môn: ");
                     specialize = scanner.nextLine();
                     check = true;
                     break;
@@ -135,27 +132,15 @@ public class TeacherService implements ITeacherService {
                 break;
             }
         } while (true);
-        Teacher teacher = new Teacher(id, name, dateOfbirth, gender, specialize);
-        return teacher;
+
+        return new Teacher(id, name, dateOfbirth, gender, specialize);
     }
 
     @Override
     public void addTeacher() {
+        teachers = ReadFileTeacher.readFileTeacher(SRC_TEACHER);
         Teacher teacher = this.infoTeacher();
         teachers.add(teacher);
-        boolean swap = true;
-        for (int k = 0; k < teachers.size() - 1 && swap; k++) {
-            swap = false;
-            for (int i = 0; i < teachers.size() - 1 - k; i++) {
-
-                if (teachers.get(i).getName().compareTo(teachers.get(i + 1).getName()) > 0) {
-                    swap = true;
-                    Teacher temp = teachers.get(i + 1);
-                    teachers.set(i + 1, teachers.get(i));
-                    teachers.set(i, temp);
-                }
-            }
-        }
         WriteFileTeacher.writeFileTeacher(SRC_TEACHER, teachers);
         System.out.println("Thêm mới giảng viên thành công");
     }
@@ -190,7 +175,7 @@ public class TeacherService implements ITeacherService {
     public void displayAllTeacher() {
         teachers = ReadFileTeacher.readFileTeacher(SRC_TEACHER);
         if (teachers.size() == 0) {
-            System.err.println("Danh sách trống");
+            System.err.println("Danh sách trống!");
         } else {
             for (Teacher teacher : teachers) {
                 System.out.println(teacher);
@@ -213,7 +198,6 @@ public class TeacherService implements ITeacherService {
                 flagDelete = true;
                 break;
             }
-
         }
         if (!flagDelete) {
             System.err.println("Không tìm thấy giảng viên!");
@@ -226,18 +210,20 @@ public class TeacherService implements ITeacherService {
         System.out.print("Nhập id giảng viên bạn muốn tìm kiếm: ");
         int id = Integer.parseInt(scanner.nextLine());
         boolean flag = false;
-        for (int i = 0; i < teachers.size(); i++) {
-            if (teachers.get(i).getId() == id) {
-                System.out.println(teachers.get(i).toString());
+        for (Teacher teacher : teachers) {
+            if (teacher.getId() == id) {
+                System.out.println(teacher.toString());
                 flag = true;
                 break;
             }
             System.err.println("Không tìm thấy giảng viên!");
             System.out.print("Nhập tên giảng viên muốn tìm kiếm: ");
             String name = scanner.nextLine();
-            for (int j = 0; j < teachers.size(); j++) {
-                if (teachers.get(j).getName().contains(name)) {
-                    System.out.println(teachers.get(j).toString());
+            for (Teacher teacher1 : teachers) {
+                if (teacher1.getName().contains(name)) {
+                    System.out.println(teacher1.toString());
+                    flag = true;
+                    break;
                 }
             }
             break;
@@ -273,6 +259,18 @@ public class TeacherService implements ITeacherService {
             }
         }
         System.out.println("Sắp xếp giảng viên thành công");
+    }
+
+    public static boolean checkDayMonthYear(String string) {
+        int[] day = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        int[] arr = new int[3];
+        arr[0] = Integer.parseInt(string.substring(0, 1).concat(string.substring(1, 2)));
+        arr[1] = Integer.parseInt(string.substring(3, 4).concat(string.substring(4, 5)));
+        arr[2] = Integer.parseInt(string.substring(6));
+        if (arr[2] % 4 == 0 && !(arr[2] % 100 == 0 && arr[2] % 400 != 0)) {
+            arr[0] = day[arr[1] - 1] + 1;
+        }
+        return (arr[0] <= day[arr[1] - 1]);
     }
 }
 

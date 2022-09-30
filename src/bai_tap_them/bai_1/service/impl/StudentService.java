@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class StudentService implements IStudentService {
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
     private static List<Student> students = new ArrayList<>();
     private static final String SRC_STUDENT = "src\\bai_tap_them\\bai_1\\data\\student.csv";
 
@@ -54,7 +54,7 @@ public class StudentService implements IStudentService {
             System.out.print("Nhập ngày sinh theo định dạng dd/MM/yyyy: ");
             try {
                 dateOfbirth = scanner.nextLine();
-                if (dateOfbirth.matches("^(?:(?:31(\\\\/|-|\\\\.)(?:0?[13578]|1[02]))\\\\1|(?:(?:29|30)(\\\\/|-|\\\\.)(?:0?[13-9]|1[0-2])\\\\2))(?:(?:1[6-9]|[2-9]\\\\d)?\\\\d{2})$|^(?:29(\\\\/|-|\\\\.)0?2\\\\3(?:(?:(?:1[6-9]|[2-9]\\\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\\\d|2[0-8])(\\\\/|-|\\\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\\\4(?:(?:1[6-9]|[2-9]\\\\d)?\\\\d{2})$")) {
+                if (!dateOfbirth.matches("^\\d{2}/\\d{2}/\\d{4}$")) {
                     throw new ExceptionCheck("Ngày sinh phải đúng định dạng dd/MM/yyyy!");
                 }
                 if (!checkDayMonthYear(dateOfbirth)) {
@@ -85,7 +85,7 @@ public class StudentService implements IStudentService {
                     check = true;
                     break;
                 case 3:
-                    System.out.print("Nhập giới tính khác: ");
+                    System.out.print("Nhập giới tính: ");
                     gender = scanner.nextLine();
                     check = true;
                     break;
@@ -125,8 +125,7 @@ public class StudentService implements IStudentService {
             }
         } while (true);
 
-        Student student = new Student(id, name, dateOfbirth, gender, nameClass, score);
-        return student;
+        return new Student(id, name, dateOfbirth, gender, nameClass, score);
     }
 
     @Override

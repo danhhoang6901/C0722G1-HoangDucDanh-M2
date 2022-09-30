@@ -7,7 +7,7 @@ import java.util.List;
 public class WriteFile {
     public static void writeFile(String src, List<String> strings) {
         try {
-            FileWriter fileWriter = new FileWriter(src);
+            FileWriter fileWriter = new FileWriter(src,true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for (String string : strings) {
                 bufferedWriter.write(string);
@@ -15,7 +15,7 @@ public class WriteFile {
             }
             bufferedWriter.close();
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            System.err.println("Lỗi gì đó chưa xác định!");
         }
     }
 }

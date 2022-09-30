@@ -1,5 +1,7 @@
 package ss16_file.exercise.copy_file_text.util;
 
+import ss16_file.exercise.copy_file_text.exception.FileTextException;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +12,7 @@ public class ReadFile {
         try {
             File file = new File(src);
             if (!file.exists()) {
-                throw new FileNotFoundException("File không tồn tại hoặc nội dung có lỗi!");
+                throw new FileTextException("File không tồn tại!");
             }
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             String line = "";
@@ -18,8 +20,8 @@ public class ReadFile {
                 strings.add(line);
             }
             bufferedReader.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        } catch (FileTextException e) {
+            System.err.println(e.getMessage());
         }
         return strings;
     }

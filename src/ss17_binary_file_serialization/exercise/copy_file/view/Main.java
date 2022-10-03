@@ -16,6 +16,7 @@ public class Main {
         WriteFile.writeFile("src\\ss17_binary_file_serialization\\exercise\\copy_file\\data\\source.csv", strings);
         strings = ReadFile.readFile("src\\ss17_binary_file_serialization\\exercise\\copy_file\\data\\source.csv");
         WriteFile.writeFile("src\\ss17_binary_file_serialization\\exercise\\copy_file\\data\\target.csv", strings);
+        System.out.println(strings);
 
         FileInputStream fileInputStream = new FileInputStream("src\\ss17_binary_file_serialization\\exercise\\copy_file\\data\\source.csv");
         long size = fileInputStream.getChannel().size();

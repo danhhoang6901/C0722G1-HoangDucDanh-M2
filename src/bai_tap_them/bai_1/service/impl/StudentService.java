@@ -16,24 +16,7 @@ public class StudentService implements IStudentService {
     private static final String SRC_STUDENT = "src\\bai_tap_them\\bai_1\\data\\student.csv";
 
     public Student infoStudent() {
-        int id;
-        do {
-            System.out.print("Nhập id của học viên: ");
-            try {
-                id = Integer.parseInt(scanner.nextLine());
-                if (id <= 0) {
-                    throw new ExceptionCheck("Id phải lớn hơn 0!");
-                }
-                for (Student student : students) {
-                    if (student.getId() == id) {
-                        throw new ExceptionCheck("Id đã có trong danh sách!");
-                    }
-                }
-                break;
-            } catch (ExceptionCheck e) {
-                System.err.println(e.getMessage());
-            }
-        } while (true);
+        int id = students.size() + 1;
 
         String name;
         do {
